@@ -1,0 +1,142 @@
+[
+  {
+    "adult": 0,
+    "child": 0,
+    "accessible": 0,
+    "attendant": "edison",
+    "timestamp": "2025-10-22 18:03:14",
+    "terminal": "Unknown",
+    "destination": "Unknown",
+    "ferry": "Unknown"
+  },
+  {
+    "adult": 0,
+    "child": 0,
+    "accessible": 0,
+    "attendant": "edison",
+    "timestamp": "2025-10-22 18:06:32",
+    "terminal": "Unknown",
+    "destination": "Unknown",
+    "ferry": "Unknown"
+  },
+  {
+    "adult": 1,
+    "child": 1,
+    "accessible": 1,
+    "attendant": "tammy",
+    "timestamp": "2025-10-22 18:15:49",
+    "terminal": "Paris",
+    "destination": "Paris",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 2,
+    "child": 0,
+    "accessible": 0,
+    "attendant": "tammy",
+    "timestamp": "2025-10-22 18:16:16",
+    "terminal": "Alderney",
+    "destination": "Paris",
+    "ferry": "Ferry 2"
+  },
+  {
+    "adult": 2,
+    "child": 1,
+    "accessible": 1,
+    "attendant": "tammy",
+    "timestamp": "2025-10-22 18:26:10",
+    "terminal": "Paris",
+    "destination": "Woodside",
+    "ferry": "Ferry 3"
+  },
+  {
+    "adult": 1,
+    "child": 1,
+    "accessible": 1,
+    "attendant": "edison",
+    "timestamp": "2025-10-24 15:09:09",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 3,
+    "child": 0,
+    "accessible": 0,
+    "attendant": "edison",
+    "timestamp": "2025-10-24 15:09:33",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 0,
+    "child": 1,
+    "accessible": 3,
+    "attendant": "edison",
+    "timestamp": "2025-10-24 15:09:41",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 2"
+  },
+  {
+    "adult": 1,
+    "child": 1,
+    "accessible": 4,
+    "attendant": "edison",
+    "timestamp": "2025-10-24 16:07:38",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 2"
+  },
+  {
+    "adult": 0,
+    "child": 2,
+    "accessible": 0,
+    "attendant": "edison",
+    "timestamp": "2025-10-24 17:18:28",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 2"
+  },
+  {
+    "adult": 0,
+    "child": 0,
+    "accessible": 1,
+    "attendant": "tammy",
+    "timestamp": "2025-10-24 17:20:56",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 0,
+    "child": 1,
+    "accessible": 0,
+    "attendant": "tammy",
+    "timestamp": "2025-10-24 17:21:30",
+    "terminal": "Alderney",
+    "destination": "Halifax",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 6,
+    "child": 1,
+    "accessible": 1,
+    "attendant": "tammy",
+    "timestamp": "2025-10-24 17:23:02",
+    "terminal": "Alderney",
+    "destination": "Halifax",
+    "ferry": "Ferry 1"
+  },
+  {
+    "adult": 0,
+    "child": 10,
+    "accessible": 0,
+    "attendant": "tammy",
+    "timestamp": "2025-10-24 17:23:52",
+    "terminal": "Halifax",
+    "destination": "Alderney",
+    "ferry": "Ferry 1"
+  }
+]

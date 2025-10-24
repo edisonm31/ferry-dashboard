@@ -1,0 +1,181 @@
+<!-- templates/counter.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Passenger Counter</h2>
+<p>Welcome, {{ current_user.username }} ({{ current_user.role }})</p>
+
+<style>
+  /* Layout spacing */
+  .form-group,
+  .counter-group {
+    margin-bottom: 1.5em;
+  }
+
+  /* Dropdowns */
+  select {
+    width: 80%;
+    padding: 0.5em;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  /* Counter rows */
+  .counter-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  .counter-row label {
+    width: 9em;
+    font-weight: bold;
+  }
+
+  .counter-row input {
+    width: 6em;
+    text-align: center;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+
+  /* Buttons */
+  button.increment {
+    width: 4.5em;
+    height: 4.5em;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    background-color: #68cd3c;
+    cursor: pointer;
+  }
+
+  /* Buttons */
+
+  button.decrement {
+    width: 2.5em;
+    height: 2.5em;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    background-color: #ef3737;
+    cursor: pointer;
+  }
+
+  button.increment:hover,
+  button.decrement:hover {
+    background-color: #ddd;
+  }
+
+  /* Submit and logout buttons */
+  button[type="submit"] {
+    margin-top: 2em;
+    padding: 0.75em 1.5em;
+    font-size: 1em;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #005fa3;
+  }
+</style>
+
+
+<form method="POST" action="/close_gate" id="closeGateForm">
+
+  <!-- Terminal Selection -->
+  <div class="form-group">
+    <label for="terminal">Terminal</label>
+    <select name="terminal" required>
+      {% for terminal in terminals %}
+      <option value="{{ terminal }}" {% if terminal==session.terminal %}selected{% endif %}>
+        {{ terminal }}
+      </option>
+      {% endfor %}
+    </select>
+
+  </div>
+
+  <!-- Destination Selection -->
+  <div class="form-group">
+    <label for="destination">Destination</label>
+    <select name="destination" required>
+      {% for terminal in terminals %}
+      <option value="{{ terminal }}" {% if terminal==session.destination %}selected{% endif %}>
+        {{ terminal }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Ferry Selection -->
+  <div class="form-group">
+    <label for="ferry">Ferry</label><br>
+    <select name="ferry" id="ferry" required>
+      {% for ferry in ferries %}
+      <option value="{{ ferry }}" {% if ferry==session.ferry %}selected{% endif %}>
+        {{ ferry }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+
+
+  <!-- Passenger Counters -->
+  <h3>Passenger Counts</h3>
+  <div class="counter-group">
+    <div class="counter-row">
+      <label>Adults</label>
+      <button type="button" class="decrement" onclick="adjustCount('adult', -1)">−</button>
+      <input type="number" name="adult" id="adult" min="0" value="0" readonly>
+      <button type="button" class="increment" onclick="adjustCount('adult', 1)">+</button>
+    </div>
+    <!-- Repeat for child, accessible -->
+  </div>
+
+
+
+  <div class="counter-group">
+
+    <div class="counter-row">
+      <label>Children</label>
+      <button type="button" class="decrement" onclick="adjustCount('child', -1)">−</button>
+      <input type="number" name="child" id="child" min="0" value="0" readonly>
+      <button type="button" class="increment" onclick="adjustCount('child', 1)">+</button>
+    </div>
+  </div>
+
+
+  <div class="counter-group">
+
+    <div class="counter-row">
+      <label>Accessible</label>
+      <button type="button" class="decrement" onclick="adjustCount('accessible', -1)">−</button>
+      <input type="number" name="accessible" id="accessible" min="0" value="0" readonly>
+      <button type="button" class="increment" onclick="adjustCount('accessible', 1)">+</button>
+    </div>
+  </div>
+  <button type="submit">Close Gate</button>
+</form>
+
+
+
+<script>
+  function adjustCount(field, delta) {
+    const input = document.getElementById(field);
+    let value = parseInt(input.value) || 0;
+    value = Math.max(0, value + delta);
+    input.value = value;
+  }
+</script>
+
+{% endblock %}

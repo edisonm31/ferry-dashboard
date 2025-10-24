@@ -1,0 +1,206 @@
+<!-- templates/admin.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Panel</h2>
+<p>Welcome, {{ current_user.username }} ({{ current_user.role }})</p>
+
+<style>
+  .admin-section {
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+  }
+
+  .admin-section h3 {
+    margin-top: 0;
+  }
+
+  .admin-section form {
+    margin-top: 1em;
+  }
+
+  .admin-section input,
+  .admin-section select {
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    width: 100%;
+    font-size: 1em;
+  }
+
+  .admin-section button {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .admin-section button:hover {
+    background-color: #005fa3;
+  }
+
+  .admin-section table td form {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
+  .admin-section table td input[type="text"] {
+    width: 10em;
+    padding: 0.4em;
+  }
+
+  .admin-section table td form {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
+  .admin-section table td select {
+    padding: 0.4em;
+  }
+</style>
+
+<!-- Manage Terminals -->
+<div class="admin-section">
+  <h3>Manage Terminals</h3>
+
+  <!-- Add Terminal Form -->
+  <form method="post" action="/admin/add_terminal">
+    <input type="text" name="terminal_name" placeholder="Add new terminal" required>
+    <button type="submit">Add Terminal</button>
+  </form>
+
+  <!-- Terminal List Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Terminal Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for terminal in terminals %}
+      <tr>
+        <td>{{ terminal.name }}</td>
+        <td>
+          <form method="post" action="/admin/edit_terminal" style="display:inline;">
+            <input type="hidden" name="terminal_id" value="{{ terminal.id }}">
+            <input type="text" name="new_name" placeholder="Rename">
+            <button type="submit">Update</button>
+          </form>
+          <form method="post" action="/admin/delete_terminal" style="display:inline;">
+            <input type="hidden" name="terminal_id" value="{{ terminal.id }}">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Manage Ferries -->
+<div class="admin-section">
+  <h3>Manage Ferries</h3>
+
+  <!-- Add Ferry Form -->
+  <form method="post" action="/admin/add_ferry">
+    <input type="text" name="ferry_name" placeholder="Add new ferry" required>
+    <button type="submit">Add Ferry</button>
+  </form>
+
+  <!-- Ferry List Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Ferry Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ferry in ferries %}
+      <tr>
+        <td>{{ ferry.name }}</td>
+        <td>
+          <form method="post" action="/admin/edit_ferry" style="display:inline;">
+            <input type="hidden" name="ferry_id" value="{{ ferry.id }}">
+            <input type="text" name="new_name" placeholder="Rename">
+            <button type="submit">Update</button>
+          </form>
+          <form method="post" action="/admin/delete_ferry" style="display:inline;">
+            <input type="hidden" name="ferry_id" value="{{ ferry.id }}">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Reset User Password -->
+<div class="admin-section">
+  <h3>Reset User Password</h3>
+  <form method="post" action="/admin/reset_password">
+    <input type="text" name="username" placeholder="Username to reset" required>
+    <button type="submit">Reset Password</button>
+  </form>
+</div>
+
+<!-- Manage Users -->
+<div class="admin-section">
+  <h3>Manage Users</h3>
+
+  <!-- Add User Form -->
+  <form method="post" action="/admin/add_user">
+    <input type="text" name="username" placeholder="New username" required>
+    <select name="role" required>
+      <option value="attendant">Attendant (Counter Only)</option>
+      <option value="crew">Crew (Counter + Dashboard)</option>
+      <option value="admin">Admin (Full Access)</option>
+    </select>
+    <button type="submit">Add User</button>
+  </form>
+
+  <!-- User List Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>
+          <form method="post" action="/admin/update_role" style="display: flex; align-items: center; gap: 0.5em;">
+            <input type="hidden" name="username" value="{{ user.username }}">
+            <select name="role">
+              <option value="attendant" {% if user.role=='attendant' %}selected{% endif %}>Attendant</option>
+              <option value="crew" {% if user.role=='crew' %}selected{% endif %}>Crew</option>
+              <option value="admin" {% if user.role=='admin' %}selected{% endif %}>Admin</option>
+            </select>
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="/admin/delete_user" style="display:inline-block;">
+            <input type="hidden" name="username" value="{{ user.username }}">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+{% endblock %}

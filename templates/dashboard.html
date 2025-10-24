@@ -1,0 +1,94 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Passenger Dashboard</h2>
+<p>Welcome, {{ current_user.username }} ({{ current_user.role }})</p>
+
+{% if current_user.role == 'crew' %}
+<p>Showing all ferry submissions.</p>
+{% elif current_user.role == 'ferry' %}
+<p>Showing submissions for: <strong>{{ current_user.username }}</strong></p>
+{% endif %}
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+  }
+
+  th,
+  td {
+    padding: 0.75em;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  thead {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+</style>
+
+<form method="get" action="/download">
+  <input type="hidden" name="ferry_filter" value="{{ selected_ferry }}">
+  <button type="submit">Download CSV</button>
+</form>
+
+<form method="GET" action="/dashboard">
+  <label for="ferry_filter">Filter by Ferry:</label>
+  <select name="ferry_filter" onchange="this.form.submit()">
+    <option value="">-- All Ferries --</option>
+    {% for ferry in ferries %}
+    <option value="{{ ferry.name }}" {% if ferry.name==selected_ferry %}selected{% endif %}>
+      {{ ferry.name }}
+    </option>
+    {% endfor %}
+  </select>
+</form>
+
+<table>
+  <thead>
+    <tr>
+      <th>Adult</th>
+      <th>Child</th>
+      <th>Accessible</th>
+      <th>Attendant</th>
+      <th>Gate Closed</th>
+      <th>Terminal</th>
+      <th>Destination</th>
+      <th>Ferry</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for entry in submissions %}
+    <tr>
+      <td>{{ entry.adult }}</td>
+      <td>{{ entry.child }}</td>
+      <td>{{ entry.accessible }}</td>
+      <td>{{ entry.attendant }}</td>
+      <td>{{ entry.timestamp }}</td>
+      <td>{{ entry.terminal }}</td>
+      <td>{{ entry.destination }}</td>
+      <td>{{ entry.ferry }}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+
+<!-- dashboard.html -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+  const socket = io();
+  socket.on('new_submission', function (data) {
+    console.log("New submission received:", data);
+    location.reload(); // or fetch new data via AJAX
+  });
+</script>
+
+
+{% endblock %}

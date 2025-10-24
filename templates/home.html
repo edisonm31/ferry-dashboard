@@ -1,0 +1,19 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome, {{ current_user.username }}!</h2>
+<p>Your role: <strong>{{ current_user.role }}</strong></p>
+
+<div class="nav-buttons">
+  {% if current_user.role == 'admin' %}
+  <a href="{{ url_for('admin') }}">Admin</a>
+  <a href="{{ url_for('dashboard') }}">Dashboard</a>
+  <a href="{{ url_for('counter') }}">Counter</a>
+  {% elif current_user.role == 'crew' %}
+  <a href="{{ url_for('dashboard') }}">Dashboard</a>
+  <a href="{{ url_for('counter') }}">Counter</a>
+  {% elif current_user.role == 'attendant' %}
+  <a href="{{ url_for('counter') }}">Counter</a>
+  {% endif %}
+</div>
+{% endblock %}

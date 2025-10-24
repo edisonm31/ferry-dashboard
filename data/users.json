@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "username": "edison",
+    "password": "password",
+    "role": "admin"
+  },
+  {
+    "id": 2,
+    "username": "tammy",
+    "password": "password",
+    "role": "admin"
+  },
+  {
+    "id": 3,
+    "username": "echo",
+    "password": "password",
+    "role": "attendant"
+  },
+  {
+    "id": 4,
+    "username": "Hank",
+    "password": "password",
+    "role": "crew"
+  },
+  {
+    "id": 5,
+    "username": "Skye",
+    "password": "password",
+    "role": "admin"
+  }
+]

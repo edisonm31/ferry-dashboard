@@ -1,0 +1,23 @@
+<!-- templates/settings.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Account Settings</h2>
+<p>Logged in as: {{ current_user.username }}</p>
+
+<form method="POST" action="/settings">
+  <label for="current_password">Current Password</label>
+  <input type="password" name="current_password" required>
+
+  <label for="new_password">New Password</label>
+  <input type="password" name="new_password" required>
+
+  <label for="confirm_password">Confirm New Password</label>
+  <input type="password" name="confirm_password" required>
+
+  <button type="submit">Update Password</button>
+</form>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+{% endblock %}
