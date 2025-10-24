@@ -4,4 +4,6 @@ services:
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -k eventlet -w 1 ferry_web:app
-    runtime: python-3.11
+    buildFilter:
+      paths:
+        - build/runtime.txt
