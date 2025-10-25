@@ -13,7 +13,7 @@ from flask import make_response
 from flask_cors import CORS
 
 
-CORS(app, supports_credentials=True)
+
 
 
 terminals = load_json('terminals.json', [])
