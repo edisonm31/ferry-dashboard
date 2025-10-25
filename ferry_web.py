@@ -65,7 +65,9 @@ def load_user(user_id):
             return user
     return None
 
-
+@app.route('/')
+def index():
+    return 'Ferry Dashboard is live!'
 
 @app.route('/change_password', methods=['POST'])
 def change_password():
