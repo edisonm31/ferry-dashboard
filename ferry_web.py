@@ -10,10 +10,10 @@ from collections import defaultdict
 import csv
 import io
 from flask import make_response
+from flask_cors import CORS
 
 
-
-
+CORS(app, supports_credentials=True)
 
 
 terminals = load_json('terminals.json', [])
@@ -23,6 +23,8 @@ submissions = load_json('submissions.json', [])
 
 app = Flask(__name__)
 app.secret_key = 'your-secret-key'  # Add this too if you haven’t
+
+CORS(app, supports_credentials=True)
 
 socketio = SocketIO(app)
 
